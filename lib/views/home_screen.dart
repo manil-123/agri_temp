@@ -15,7 +15,7 @@ class HomeScreen extends StatelessWidget {
         title: const Text('Home'),
       ),
       body: Consumer<HomeProvider>(
-        builder: (context, homeProvider, child) {
+        builder: (_, homeProvider, __) {
           if (homeProvider.loading) {
             return const Center(
               child: CircularProgressIndicator(

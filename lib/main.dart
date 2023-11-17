@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_agriculture/provider/home_provider.dart';
+import 'package:flutter_agriculture/provider/product_detail_provider.dart';
 import 'package:flutter_agriculture/repository/product_repository.dart';
 import 'package:flutter_agriculture/repository/product_repository_impl.dart';
 import 'package:flutter_agriculture/views/home_screen.dart';
@@ -23,6 +24,11 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider<HomeProvider>(
           create: (_) =>
               HomeProvider(ProductRepositoryImpl())..getProductsList(),
+        ),
+        ChangeNotifierProvider<ProductDetailProvider>(
+          create: (_) => ProductDetailProvider(
+            ProductRepositoryImpl(),
+          ),
         ),
       ],
       child: MaterialApp(
