@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_agriculture/provider/home_provider.dart';
+import 'package:flutter_agriculture/repository/product_repository.dart';
+import 'package:flutter_agriculture/repository/product_repository_impl.dart';
 import 'package:flutter_agriculture/views/home_screen.dart';
+import 'package:provider/provider.dart';
 
 void main() {
   runApp(const MyApp());
@@ -11,13 +15,24 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Agriculture',
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.red),
-        useMaterial3: true,
+    return MultiProvider(
+      providers: [
+        Provider<ProductRepository>(
+          create: (_) => ProductRepositoryImpl(),
+        ),
+        ChangeNotifierProvider<HomeProvider>(
+          create: (_) =>
+              HomeProvider(ProductRepositoryImpl())..getProductsList(),
+        ),
+      ],
+      child: MaterialApp(
+        title: 'Agriculture',
+        theme: ThemeData(
+          colorScheme: ColorScheme.fromSeed(seedColor: Colors.red),
+          useMaterial3: true,
+        ),
+        home: const HomeScreen(),
       ),
-      home: const HomeScreen(),
     );
   }
 }

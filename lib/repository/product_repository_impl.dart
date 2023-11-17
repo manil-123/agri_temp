@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'package:flutter_agriculture/core/endpoints.dart';
 import 'package:flutter_agriculture/models/product_model.dart';
 import 'package:flutter_agriculture/repository/product_repository.dart';
@@ -12,7 +13,7 @@ class ProductRepositoryImpl implements ProductRepository {
         Uri.parse(Endpoints.homeUrl),
       );
       if (response.statusCode == 200) {
-        final list = response.body as List<dynamic>;
+        final list = jsonDecode(response.body);
         for (var item in list) {
           final product = ProductModel.fromJson(item);
           productsList.add(product);
@@ -21,7 +22,7 @@ class ProductRepositoryImpl implements ProductRepository {
       }
       return productsList;
     } catch (e) {
-      rethrow;
+      throw Exception('Failed to get products');
     }
   }
 }
