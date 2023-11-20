@@ -41,17 +41,17 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                 color: Colors.black,
               ),
             );
-          } else if (provider.errorMessage.isNotEmpty) {
+          } else if (provider.errorMessage != null) {
             return Center(
-              child: Text(provider.errorMessage),
+              child: Text(provider.errorMessage!),
             );
           } else {
-            final productModel = provider.productDetailResponse?.metaEng;
-            String? firstImageUrl = productModel?.first.imagearray != null &&
-                    productModel?.first.imagearray?.length != 0
-                ? productModel?.first.imagearray?.first.imageOne
-                : 'asdasd';
-            log(firstImageUrl!.toString());
+            // final productModel = provider.productDetailResponse?.metaEng;
+            // String? firstImageUrl = productModel?.first.imagearray != null &&
+            //         productModel?.first.imagearray?.length != 0
+            //     ? productModel?.first.imagearray?.first.imageOne
+            //     : 'asdasd';
+            // log(firstImageUrl!.toString());
 
             return Container(
               padding: const EdgeInsets.all(8.0),

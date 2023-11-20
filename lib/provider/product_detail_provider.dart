@@ -9,16 +9,17 @@ class ProductDetailProvider extends ChangeNotifier {
 
   bool _loading = false;
   ProductDetailResponse? _productDetailResponse;
-  String _errorMessage = '';
+  String? _errorMessage;
 
   bool get loading => _loading;
   ProductDetailResponse? get productDetailResponse => _productDetailResponse;
-  String get errorMessage => _errorMessage;
+  String? get errorMessage => _errorMessage;
 
   Future<void> getProductsDetail(String id) async {
     _loading = true;
     try {
       _productDetailResponse = await _productRepository.getProductDetail(id);
+      _errorMessage = null;
     } catch (e) {
       _errorMessage = e.toString();
     } finally {
