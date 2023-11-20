@@ -46,19 +46,133 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
               child: Text(provider.errorMessage!),
             );
           } else {
-            // final productModel = provider.productDetailResponse?.metaEng;
-            // String? firstImageUrl = productModel?.first.imagearray != null &&
-            //         productModel?.first.imagearray?.length != 0
-            //     ? productModel?.first.imagearray?.first.imageOne
-            //     : 'asdasd';
-            // log(firstImageUrl!.toString());
+            final generalDetail =
+                provider.productDetailResponse?.englishModel.generalDetail;
+
+            final morphologicalDetail = provider
+                .productDetailResponse?.englishModel.morphologicalDetail;
+
+            final agronomicalDetail =
+                provider.productDetailResponse?.englishModel.agronomicalDetail;
+
+            final nutritionalDetail =
+                provider.productDetailResponse?.englishModel.nutritionalDetail;
+
+            final distinctDetail =
+                provider.productDetailResponse?.englishModel.distinctDetail;
+
+            final imageDetail =
+                provider.productDetailResponse?.englishModel.imageDetail;
 
             return Container(
               padding: const EdgeInsets.all(8.0),
               child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  // CachedNetworkImage(
-                  //     imageUrl: productModel![5].imagearray![0].imageOne!)
+                  if (imageDetail?.isNotEmpty ?? false) ...[
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        for (var entry in imageDetail!.entries)
+                          Expanded(
+                            child: Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: CachedNetworkImage(imageUrl: entry.value),
+                            ),
+                          )
+                      ],
+                    ),
+                  ],
+                  if (generalDetail?.isNotEmpty ?? false) ...[
+                    const Text(
+                      'General Details:',
+                      style:
+                          TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                    ),
+                    for (var entry in generalDetail!.entries)
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Expanded(child: Text('${entry.key}:')),
+                          Expanded(child: Text(' ${entry.value}'))
+                        ],
+                      ),
+                    const SizedBox(
+                      height: 8.0,
+                    ),
+                  ],
+                  if (morphologicalDetail?.isNotEmpty ?? false) ...[
+                    const Text(
+                      'Morphological Details:',
+                      style:
+                          TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                    ),
+                    for (var entry in morphologicalDetail!.entries)
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Expanded(child: Text('${entry.key}:')),
+                          Expanded(child: Text(' ${entry.value}'))
+                        ],
+                      ),
+                    const SizedBox(
+                      height: 8.0,
+                    ),
+                  ],
+                  if (agronomicalDetail?.isNotEmpty ?? false) ...[
+                    const Text(
+                      'Agronomical Details:',
+                      style:
+                          TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                    ),
+                    for (var entry in agronomicalDetail!.entries)
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Expanded(child: Text('${entry.key}:')),
+                          Expanded(child: Text(' ${entry.value}'))
+                        ],
+                      ),
+                    const SizedBox(
+                      height: 8.0,
+                    ),
+                  ],
+                  if (nutritionalDetail?.isNotEmpty ?? false) ...[
+                    const Text(
+                      'Nutritional Details:',
+                      style:
+                          TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                    ),
+                    for (var entry in nutritionalDetail!.entries)
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Expanded(child: Text('${entry.key}:')),
+                          Expanded(child: Text(' ${entry.value}'))
+                        ],
+                      ),
+                    const SizedBox(
+                      height: 8.0,
+                    ),
+                  ],
+                  if (distinctDetail?.isNotEmpty ?? false) ...[
+                    const Text(
+                      'Distinct Details:',
+                      style:
+                          TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                    ),
+                    for (var entry in distinctDetail!.entries)
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Expanded(child: Text('${entry.key}:')),
+                          Expanded(child: Text(' ${entry.value}'))
+                        ],
+                      ),
+                    const SizedBox(
+                      height: 8.0,
+                    ),
+                  ],
                 ],
               ),
             );
